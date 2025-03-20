@@ -37,3 +37,13 @@ void addDir(Directory *p, Directory *c) {
 
     p->subdirectories[p->subdirectoryCount] = c;
 }
+
+void addFile(Directory *p, File *f) {
+    if (p->fileCount == p->maxFileCount) {
+        p->subdirectories = realloc(p->subdirectories, (sizeof(Directory*) * (p->maxFileCount + 5)));
+        p->maxFileCount += 5;
+    }
+    p->fileCount += 1;
+
+    p->subdirectories[p->fileCount] = f;
+}
