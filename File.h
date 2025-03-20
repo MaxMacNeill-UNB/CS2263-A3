@@ -41,9 +41,11 @@ int *renameFile(File *file, char *nameIn) {
 }
 
 int *changeFileContents(File *file, char *contentsIn, char *dateIn) {
+	free(file->contents);
 	int *result = realloc(file->contents, sizeof(contentsIn));
 	file->contents = strdup(contentsIn);
 	
+	free(file->dateModified);
 	int *result2 = realloc(file->dateModified, sizeof(dateIn));
 	file->dateModified = strdup(dateIn);
 	if(result == NULL || result2 == NULL) {
