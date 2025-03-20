@@ -11,16 +11,47 @@ struct File {
 	char *dateCreated;
 };
 
-void renameFile(File *file, char *nameIn) {
-	realloc(file->name, sizeof(nameIn));
-	file->name = strdup(nameIn);
+File *constructFile(char *nameIn, char *contentsIn, int sizeIn, char *dateIn) {
+	File *f = malloc(sizeof(File));
+	
+	f->name = malloc(sizeof(nameIn));
+	f->contents = malloc(sizeof(contentsIn));
+	f->dateModified = malloc(sizeof(dateIn));
+	
+	f->name = strdup(nameIn);
+	f->contents = strdup(contentsIn);
+	f->dateCreated = strdup(dateIn);
+	f->dateModified = NULL;
+	f->size = sizeIn;
+	
+	return f;
 }
 
-void changeContents(File *file, char *contentsIn, char *dateIn) {
-	realloc(file->contents, sizeof(contentsIn));
+void destructFile(File *f) {
+	free(f->name);
+	free(f->contents);
+	free(f->dateModified);
+	free(f);
+}
+
+int *renameFile(File *file, char *nameIn) {
+	int *result = realloc(file->name, sizeof(nameIn));
+	file->name = strdup(nameIn);
+	return result;
+}
+
+int *changeFileContents(File *file, char *contentsIn, char *dateIn) {
+	int *result = realloc(file->contents, sizeof(contentsIn));
 	file->contents = strdup(contentsIn);
-	realloc(file->dateModified, sizeof(dateIn));
+	
+	int *result2 = realloc(file->dateModified, sizeof(dateIn));
 	file->dateModified = strdup(dateIn);
+	if(result == NULL || result2 == NULL) {
+		return NULL;
+	}
+	else {
+		return result;
+	}
 }
 
 
