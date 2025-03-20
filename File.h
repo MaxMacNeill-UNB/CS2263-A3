@@ -1,5 +1,4 @@
-#include <sdtlib.h>
-#include "Directory.h"
+#include <stdlib.h>
 
 typedef struct {
 	char *name;
@@ -9,3 +8,5 @@ typedef struct {
 	char *dateCreated;
 	
 } File;
+
+
