@@ -4,6 +4,7 @@
 typedef struct Directory Directory;
 
 struct Directory {
+    char* name;
     Directory* parent;
     Directory** subdirectories;
     int subdirectoryCount;
@@ -13,13 +14,26 @@ struct Directory {
     int maxFileCount;
 };
 
-Directory *newDir(Directory *p) {
+Directory *newDir(Directory *p, char* name) {
     Directory *ndir = malloc(sizeof(Directory));
+    ndir->name = name;
     ndir->parent = p;
-    ndir->subdirectories = malloc(sizeof(*Directory) * 5);
+    ndir->subdirectories = malloc(sizeof(Directory*) * 5);
     ndir->subdirectoryCount = 0;
     ndir->maxSubdirectoryCount = 5;
-    ndir->files = malloc(sizeof(*File) * 5);
+    ndir->files = malloc(sizeof(File*) * 5);
     ndir->fileCount = 0;
     ndir->maxFileCount = 5;
+
+    addDir(p, ndir);
+}
+
+void addDir(Directory *p, Directory *c) {
+    if (p->subdirectoryCount == p->maxSubdirectoryCount) {
+        p->subdirectories = realloc(p->subdirectories, (sizeof(Directory*) * (p->maxSubdirectoryCount + 5)));
+        p->maxSubdirectoryCount += 5;
+    }
+    p->subdirectoryCount += 1;
+
+    p->subdirectories[p->subdirectoryCount] = c;
 }
