@@ -3,7 +3,9 @@
 
 typedef struct {
 	char *name;
-	Directory root;
 	char *contents;
+	int size;
+	char *dateModified;
+	char *dateCreated;
 	
 } File;
