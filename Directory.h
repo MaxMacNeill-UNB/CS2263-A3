@@ -47,3 +47,39 @@ void addFile(Directory *p, File *f) {
 
     p->files[p->fileCount] = f;
 }
+
+void listCurrentDirectory(Directory *d) {
+	for(int i = 0; i < d->subdirectoryCount; i++) {
+		printf("+ %s\n", d->subdirectories[i]->name);
+	}
+	for(int i =0; i < d->fileCount; i++) {
+		printf("%s\n", d->files[i]->name);
+	}
+}
+
+void freeDirectory(Directory *d) {
+	for(int i = 0; i < d->subdirectoryCount; i++) {
+		freeDirectory(d->subdirectories[i]);
+	}
+	free(d->subdirectories);
+	for(int i =0; i < d->fileCount; i++) {
+		freeFile(d->files[i]);
+	}
+	free(d->files);
+	free(d->name);
+	free(d);
+}
+
+//TODO: Implement changedirectory
+
+void listDirectoryStructure(Directory *d) {
+	for(int i = 0; i < d->subdirectoryCount; i++) {
+		printf("dir:\t");
+		printf("+ %s\n", d->subdirectories[i]->name);
+		listDirectoryStructure(d->subdirectories[i]);
+	}
+	for(int i =0; i < d->fileCount; i++) {
+		printf("%s\n", d->files[i]->name);
+	}	
+}
+//recursive?

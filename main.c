@@ -1,7 +1,5 @@
 #include "utils.h"
 
-#include "Directory.h"
-
 #include <stdio.h>
 
 int main() {
@@ -14,8 +12,10 @@ int main() {
     printf("\n--- File System Menu ---\n");
     printf("1. Create Directory\n");
     printf("2. Create File\n");
-    printf("3. List Directory\n");
-    printf("4. Exit\n");
+    printf("3. List Directory Structure\n");
+	printf("4. List Current Directory\n");
+	printf("5. Change Current Directory\n");
+    printf("6. Exit\n");
     printf("Enter choice: ");
     scanf("%d", & choice);
     getchar();
@@ -30,20 +30,28 @@ int main() {
       }
       break;
     case 2:
-      printf("Enter file name: ");
-      getUserInput(name, 100);
-      if (validateName(name, currentDir)) {
-        constructFile(name, NULL, 0, char *dateIn)
-        // createFile(currentDir, name, size);
-      } else {
-        printf("Error: Name already exists.\n");
-      }
+      // TODO: Implement
+	  File *f = createFile();
+	  addFile(currentDir, f);
+	  printf("Added file");
       break;
     case 3:
       printf("\nDirectory Structure:\n");
-      listDirectory(root, 0);
+      listDirectoryStructure(root);
       break;
-    case 4:
+	case 4:
+		listCurrentDirectory(currentDir);
+	
+		break;
+	case 5: 
+		printf("Enter a '.' to go return to the parent directory\n");
+		printf("Enter the name of the subdirectory you wish to change to: ");
+		
+		//TODO
+		
+	
+		break;
+    case 6:
       freeDirectory(root);
       printf("Exiting program...\n");
       return 0;

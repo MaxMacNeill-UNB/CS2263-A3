@@ -27,7 +27,7 @@ File *constructFile(char *nameIn, char *contentsIn, int sizeIn, char *dateIn) {
 	return f;
 }
 
-void destructFile(File *f) {
+void freeFile(File *f) {
 	free(f->name);
 	free(f->contents);
 	free(f->dateModified);
@@ -46,6 +46,28 @@ int *changeFileContents(File *file, char *contentsIn, char *dateIn) {
 	
 	free(file->dateModified);
 	file->dateModified = strdup(dateIn);
+}
+
+//ask the user for input to create the file
+File *createFile() {
+	char *name;
+	char *contents;
+	int size;
+	char *date;
+	
+	printf("Please enter the name of the file: ");
+	scanf("%s", &name);
+	
+	printf("Please enter the contents of the file: ");
+	scanf("%s", &contents);
+	
+	printf("Please enter the size of the file: ");
+	scanf("%d", &size);
+	
+	printf("Please enter the current date (YYYY-MM-DD): ");
+	scanf("%s", &date);
+	
+	return constructFile(name, contents, size, date);
 }
 
 
