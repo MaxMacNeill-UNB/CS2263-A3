@@ -30,10 +30,9 @@ int main() {
       }
       break;
     case 2:
-      // TODO: Implement
-	  File *f = createFile();
-	  addFile(currentDir, f);
-	  printf("Added file");
+      File *f = createFile();
+      addFile(currentDir, f);
+      printf("Added file");
       break;
     case 3:
       printf("\nDirectory Structure:\n");

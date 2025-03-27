@@ -11,18 +11,14 @@ struct File {
 	char *dateCreated;
 };
 
-File *constructFile(char *nameIn, char *contentsIn, int sizeIn, char *dateIn) {
+File *constructFile(char *nameIn, char *contentsIn, char *dateIn) {
 	File *f = malloc(sizeof(File));
-	
-	f->name = malloc(sizeof(nameIn));
-	f->contents = malloc(sizeof(contentsIn));
-	f->dateModified = malloc(sizeof(dateIn));
 	
 	f->name = strdup(nameIn);
 	f->contents = strdup(contentsIn);
 	f->dateCreated = strdup(dateIn);
 	f->dateModified = NULL;
-	f->size = sizeIn;
+	f->size = sizeof(f->contents);
 	
 	return f;
 }
@@ -50,10 +46,9 @@ int *changeFileContents(File *file, char *contentsIn, char *dateIn) {
 
 //ask the user for input to create the file
 File *createFile() {
-	char *name;
-	char *contents;
-	int size;
-	char *date;
+	char *name = malloc(1000);
+	char *contents = malloc(1000000);
+	char *date = malloc(sizeof(char) * 10);
 	
 	printf("Please enter the name of the file: ");
 	scanf("%s", &name);
@@ -61,13 +56,14 @@ File *createFile() {
 	printf("Please enter the contents of the file: ");
 	scanf("%s", &contents);
 	
-	printf("Please enter the size of the file: ");
-	scanf("%d", &size);
-	
 	printf("Please enter the current date (YYYY-MM-DD): ");
 	scanf("%s", &date);
 	
-	return constructFile(name, contents, size, date);
+	return constructFile(name, contents, date);
+
+	free(name);
+	free(contents);
+	free(date);
 }
 
 
