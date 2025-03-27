@@ -6,8 +6,8 @@
 
 void getUserInput(char *buffer, int size) 
 {
-fgets(buffer, size, stdin);
-buffer[strcspn(buffer, "\n")] = '\0';
+    fgets(buffer, size, stdin);
+    buffer[strcspn(buffer, "\n")] = '\0';
 }
 
 
