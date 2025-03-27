@@ -1,5 +1,6 @@
-#include "filesystem.h"
 #include "utils.h"
+#include "File.h"
+#include "Directory.h"
 int main() 
 {
 Directory *root = createDirectory(NULL, "root");
