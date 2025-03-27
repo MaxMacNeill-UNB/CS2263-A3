@@ -1,10 +1,14 @@
 #ifndef UTILS_H
 #define UTILS_H
 
-#include "File.h"
-#include "Directory.h"
+#include <string.h>
+#include <stdio.h>
 
-void getUserInput(char *buffer, int size);
-int validateName(const char *name, Directory *parent);
+void getUserInput(char *buffer, int size) 
+{
+fgets(buffer, size, stdin);
+buffer[strcspn(buffer, "\n")] = '\0';
+}
+
 
 #endif
