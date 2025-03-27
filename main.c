@@ -1,13 +1,11 @@
 #include "utils.h"
 
-#include "File.h"
-
 #include "Directory.h"
 
 #include <stdio.h>
 
 int main() {
-  Directory * root = createDirectory(NULL, "root");
+  Directory * root = newDir(NULL, "root");
   int choice;
   char name[100];
   int size;
@@ -26,7 +24,7 @@ int main() {
       printf("Enter directory name: ");
       getUserInput(name, 100);
       if (validateName(name, currentDir)) {
-        createDirectory(currentDir, name);
+        newDir(currentDir, name);
       } else {
         printf("Error: Name already exists.\n");
       }
@@ -35,10 +33,8 @@ int main() {
       printf("Enter file name: ");
       getUserInput(name, 100);
       if (validateName(name, currentDir)) {
-        printf("Enter file size: ");
-        scanf("%d", & size);
-        getchar();
-        createFile(currentDir, name, size);
+        constructFile(name, NULL, 0, char *dateIn)
+        // createFile(currentDir, name, size);
       } else {
         printf("Error: Name already exists.\n");
       }
