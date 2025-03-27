@@ -14,6 +14,16 @@ struct Directory {
     int maxFileCount;
 };
 
+void addDir(Directory *p, Directory *c) {
+    if (p->subdirectoryCount == p->maxSubdirectoryCount) {
+        p->subdirectories = realloc(p->subdirectories, (sizeof(Directory*) * (p->maxSubdirectoryCount + 5)));
+        p->maxSubdirectoryCount += 5;
+    }
+    p->subdirectoryCount += 1;
+
+    p->subdirectories[p->subdirectoryCount] = c;
+}
+
 Directory *newDir(Directory *p, char* name) {
     Directory *ndir = malloc(sizeof(Directory));
     ndir->name = name;
@@ -28,16 +38,6 @@ Directory *newDir(Directory *p, char* name) {
     addDir(p, ndir);
 }
 
-void addDir(Directory *p, Directory *c) {
-    if (p->subdirectoryCount == p->maxSubdirectoryCount) {
-        p->subdirectories = realloc(p->subdirectories, (sizeof(Directory*) * (p->maxSubdirectoryCount + 5)));
-        p->maxSubdirectoryCount += 5;
-    }
-    p->subdirectoryCount += 1;
-
-    p->subdirectories[p->subdirectoryCount] = c;
-}
-
 void addFile(Directory *p, File *f) {
     if (p->fileCount == p->maxFileCount) {
         p->subdirectories = realloc(p->subdirectories, (sizeof(Directory*) * (p->maxFileCount + 5)));
@@ -45,5 +45,5 @@ void addFile(Directory *p, File *f) {
     }
     p->fileCount += 1;
 
-    p->subdirectories[p->fileCount] = f;
+    p->files[p->fileCount] = f;
 }
