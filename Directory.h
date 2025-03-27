@@ -35,7 +35,9 @@ Directory *newDir(Directory *p, char* name) {
     ndir->fileCount = 0;
     ndir->maxFileCount = 5;
 
-    addDir(p, ndir);
+    if (p) {
+        addDir(p, ndir);
+    }
 }
 
 void addFile(Directory *p, File *f) {
